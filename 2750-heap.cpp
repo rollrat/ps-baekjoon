@@ -34,17 +34,14 @@ int heap_pop() {
     int l = p * 2 + 1;
     int r = p * 2 + 2;
 
-    if (l < heap_leaf && heap[p] > heap[l]) {
-      if (r < heap_leaf && heap[r] < heap[l]) {
-        swap(heap[p], heap[r]);
-        p = r;
-      } else {
-        swap(heap[p], heap[l]);
-        p = l;
-      }
-    } else if (r < heap_leaf && heap[p] > heap[r]) {
-      swap(heap[p], heap[r]);
-      p = r;
+    int c = l;
+
+    if (r < heap_leaf && heap[l] > heap[r])
+      c = r;
+
+    if (c < heap_leaf && heap[p] > heap[c]) {
+      swap(heap[p], heap[c]);
+      p = c;
     } else {
       break;
     }
